@@ -1,8 +1,16 @@
 {
   "name": "api-cjn",
   "version": "1.0.0",
-  "description": "长江新闻网的接口",
-  "main": "index.js",
+  "description": "长江新闻网api接口",
+  "main": "app.js",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "koa": "^2.13.4",
+    "koa-body": "^4.2.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-router": "^10.1.1"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,12 +23,5 @@
   "bugs": {
     "url": "https://github.com/yaozhixing/api-cjn/issues"
   },
-  "homepage": "https://github.com/yaozhixing/api-cjn#readme",
-  "dependencies": {
-    "axios": "^0.24.0",
-    "koa": "^2.13.4",
-    "koa-body": "^4.2.0",
-    "koa-bodyparser": "^4.3.0",
-    "koa-router": "^10.1.1"
-  }
+  "homepage": "https://github.com/yaozhixing/api-cjn#readme"
 }
