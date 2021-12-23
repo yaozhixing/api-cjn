@@ -1,16 +1,20 @@
 const fs = require("fs")
 const path = require("path")
-const jsonMap = {
-  users: path.join(__dirname, '../json/users.json')
-}
+const users = path.join(__dirname, '../json/users.json')
 
 // 写入
-const writeJson = (data, callBack) => {
+const writeJson = async (data, callBack) => {
   const dataString = JSON.stringify(data);
-  fs.writeFile(jsonMap[data], dataString, (err, data) => {
-    if (err) return console.error(err);
-    callBack()
-  })
+  await write(users, dataString)
+  callBack()
+}
+
+const write = async (table, dataString) => {
+  try {
+    await fs.writeFileSync(table, dataString)
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 module.exports = {

@@ -1,5 +1,5 @@
 const router = require('koa-router')();
-const users = require("../data/users"); // 用户
+const users = require("../json/users"); // 用户
 const { writeJson } = require("../sql/sql-json") // 写去json
 
 /**
@@ -68,10 +68,7 @@ router.post('/register', async (ctx) => {
     ctx.body = {
       status: "C0000",
       message: "注册成功",
-      result: {
-        email,
-        password
-      }
+      result: { email, password }
     }
   })
 })
@@ -80,7 +77,7 @@ router.post('/register', async (ctx) => {
 /**
  * 忘记密码
  */
-router.post('/forgerPassword', async (ctx) => {
+router.post('/forgetPassword', async (ctx) => {
   const { email } = ctx.request.body // use
   // 是否存在
   const isExist = users.some((item) => item.email === email)
@@ -123,12 +120,11 @@ router.post('/resetPassword', async (ctx) => {
     ctx.body = {
       status: "C0000",
       message: "重置成功",
-      result: {
-        email,
-        password
-      }
+      result: { email, password }
     }
   })
 })
 
 module.exports = router
+
+
