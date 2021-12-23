@@ -1,6 +1,6 @@
 const router = require('koa-router')();
 const users = require("../data/users"); // 用户
-const { writeJson } = require("../sql/wirte-json") // 写入json
+const { writeJson } = require("../sql/sql-json") // 写去json
 
 /**
  * 登录
