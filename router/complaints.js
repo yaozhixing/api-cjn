@@ -2,9 +2,8 @@ const router = require('koa-router')();
 const request = require('../request/request');
 
 /**
- * 投诉建议
+ * 投诉建议接口
  */
-
 router.get('/complaints', (ctx, next) => {
   ctx.body = {
     url: ctx.url,

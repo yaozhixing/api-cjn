@@ -2,7 +2,9 @@ const router = require('koa-router')();
 const users = require("../data/users"); // 用户
 const { writeJson } = require("../sql/wirte-json") // 写入json
 
-// 登录
+/**
+ * 登录
+ */
 router.post('/login', async (ctx) => {
   const { email, password } = ctx.request.body // use
   // 是否存在
@@ -36,7 +38,9 @@ router.post('/login', async (ctx) => {
   }
 })
 
-// 注册
+/**
+ * 注册
+ */
 router.post('/register', async (ctx) => {
   const { email, password } = ctx.request.body // use
   // 是否存在
@@ -64,6 +68,61 @@ router.post('/register', async (ctx) => {
     ctx.body = {
       status: "C0000",
       message: "注册成功",
+      result: {
+        email,
+        password
+      }
+    }
+  })
+})
+
+
+/**
+ * 忘记密码
+ */
+router.post('/forgerPassword', async (ctx) => {
+  const { email } = ctx.request.body // use
+  // 是否存在
+  const isExist = users.some((item) => item.email === email)
+  if (!isExist) {
+    ctx.body = {
+      status: "E0002",
+      message: "邮箱未注册",
+      result: true
+    }
+    return
+  }
+
+  const currUser = users.find((item) => item.email === email)
+  ctx.body = {
+    status: "C0000",
+    message: "成功",
+    result: currUser
+  }
+})
+
+/**
+ * 重置密码
+ */
+router.post('/resetPassword', async (ctx) => {
+  const { email, password } = ctx.request.body // use
+  // 是否存在
+  const isExist = users.some((item) => item.email === email)
+  if (!isExist) {
+    ctx.body = {
+      status: "E0002",
+      message: "邮箱未注册",
+      result: true
+    }
+    return
+  }
+
+  const index = users.findIndex((item) => item.email === email)
+  users[index].password = password
+  writeJson(users, () => {
+    ctx.body = {
+      status: "C0000",
+      message: "重置成功",
       result: {
         email,
         password
